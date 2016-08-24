@@ -19,7 +19,6 @@ export default class Modal extends Component {
           <span className="modal-close" onClick={this.close} />
         </div>
         <div className="modal-body" />
-        <div className="modal-footer" />
       </div>
     );
   }
