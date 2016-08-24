@@ -8,4 +8,10 @@ describe('<Modal />', () => {
     const wrapper = shallow(<Modal className="foobar" />);
     expect(wrapper.hasClass('foobar')).toBe(true);
   });
+
+  it('should have a header', () => {
+    const wrapper = shallow(<Modal className="foobar" />);
+    const header = wrapper.find('.modal-header');
+    expect(header.length).toBe(1);
+  });
 });
