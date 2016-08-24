@@ -5,6 +5,7 @@ export default class Modal extends Component {
     return (
       <div className={this.props.className}>
         <div className="modal-header" />
+        <div className="modal-body" />
       </div>
     );
   }

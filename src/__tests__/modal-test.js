@@ -14,4 +14,10 @@ describe('<Modal />', () => {
     const header = wrapper.find('.modal-header');
     expect(header.length).toBe(1);
   });
+
+  it('should have a body', () => {
+    const wrapper = shallow(<Modal className="foobar" />);
+    const header = wrapper.find('.modal-body');
+    expect(header.length).toBe(1);
+  });
 });
