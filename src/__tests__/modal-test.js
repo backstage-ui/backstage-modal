@@ -34,4 +34,10 @@ describe('<Modal />', () => {
 
     expect(close.length).toBe(1);
   });
+
+  it('isOpen false by default', () => {
+    const wrapper = shallow(<Modal />);
+
+    expect(wrapper.state('isOpen')).toBe(false);
+  });
 });
