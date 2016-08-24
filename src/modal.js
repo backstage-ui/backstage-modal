@@ -16,6 +16,9 @@ export default class Modal extends Component {
     return (
       <div className={this.props.className}>
         <div className="modal-header">
+          <span className="modal-title">
+            {this.props.title}
+          </span>
           <span className="modal-close" onClick={this.close} />
         </div>
         <div className="modal-body" />
@@ -27,8 +30,10 @@ export default class Modal extends Component {
 Modal.propTypes = {
   className: React.PropTypes.string,
   isOpen: React.PropTypes.bool,
+  title: React.PropTypes.string,
 };
 
 Modal.defaultProps = {
   isOpen: false,
+  title: '',
 };

@@ -49,4 +49,12 @@ describe('<Modal />', () => {
 
     expect(wrapper.state('isOpen')).toBe(false);
   });
+
+  it('should have a title', () => {
+    const wrapper = shallow(<Modal title="my title" />);
+    const header = wrapper.find('.modal-header');
+    const title = header.find('.modal-title');
+
+    expect(title.text()).toBe('my title');
+  });
 });
