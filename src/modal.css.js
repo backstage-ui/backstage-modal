@@ -6,7 +6,6 @@ export default {
   },
   modal: {
     width: '465px',
-    height: '336px',
     borderRadius: '4px',
     backgroundColor: '#fff',
     boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.3)',

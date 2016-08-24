@@ -30,7 +30,7 @@ export default class Modal extends Component {
             x
           </span>
         </div>
-        <div className="modal-body" styles={styles.body}>
+        <div className="modal-body" style={styles.body}>
           {this.props.children}
         </div>
       </div>
