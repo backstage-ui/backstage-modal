@@ -4,16 +4,22 @@
   "description": "backstage modal",
   "main": "dist/modal.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/backstage-ui/backstage-modal.git"
+  },
+  "jest": {
+    "automock": false
   },
   "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/backstage-ui/backstage-modal/issues"
   },
-  "homepage": "https://github.com/backstage-ui/backstage-modal#readme"
+  "homepage": "https://github.com/backstage-ui/backstage-modal#readme",
+  "devDependencies": {
+    "jest": "^14.1.0"
+  }
 }
