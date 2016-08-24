@@ -4,7 +4,7 @@ export default class Modal extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { isOpen: false };
+    this.state = { isOpen: this.props.isOpen };
   }
 
   render() {
@@ -22,4 +22,9 @@ export default class Modal extends Component {
 
 Modal.propTypes = {
   className: React.PropTypes.string,
+  isOpen: React.PropTypes.bool,
+};
+
+Modal.defaultProps = {
+  isOpen: false,
 };
