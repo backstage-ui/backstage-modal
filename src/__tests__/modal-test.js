@@ -1,6 +1,6 @@
 /* global describe, it, expect */
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Modal from '../modal';
 
 describe('<Modal />', () => {
@@ -45,5 +45,14 @@ describe('<Modal />', () => {
     const wrapper = shallow(<Modal isOpen />);
 
     expect(wrapper.state('isOpen')).toBe(true);
+  });
+
+  it('close should change isOpen to false', () => {
+    const wrapper = mount(<Modal isOpen />);
+    const close = wrapper.find('.modal-close');
+
+    close.simulate('click');
+
+    expect(wrapper.state('isOpen')).toBe(false);
   });
 });
