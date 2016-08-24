@@ -10,14 +10,20 @@ describe('<Modal />', () => {
   });
 
   it('should have a header', () => {
-    const wrapper = shallow(<Modal className="foobar" />);
+    const wrapper = shallow(<Modal />);
     const header = wrapper.find('.modal-header');
     expect(header.length).toBe(1);
   });
 
   it('should have a body', () => {
-    const wrapper = shallow(<Modal className="foobar" />);
+    const wrapper = shallow(<Modal />);
     const header = wrapper.find('.modal-body');
+    expect(header.length).toBe(1);
+  });
+
+  it('should have a footer', () => {
+    const wrapper = shallow(<Modal />);
+    const header = wrapper.find('.modal-footer');
     expect(header.length).toBe(1);
   });
 });
