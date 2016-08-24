@@ -20,7 +20,9 @@ export default class Modal extends Component {
           <span className="modal-title" style={styles.title}>
             {this.props.title}
           </span>
-          <span className="modal-close" onClick={this.close} />
+          <span className="modal-close" onClick={this.close} style={styles.close}>
+            x
+          </span>
         </div>
         <div className="modal-body" styles={styles.body}>
           {this.props.children}

@@ -30,4 +30,12 @@ export default {
     letterSpacing: '-0.8px',
     color: '#333',
   },
+  close: {
+    color: '#999',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    position: 'absolute',
+    right: '20px',
+  },
 };
