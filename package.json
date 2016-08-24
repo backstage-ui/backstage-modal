@@ -4,9 +4,13 @@
   "description": "backstage modal",
   "main": "dist/modal.js",
   "scripts": {
+    "build": "babel src/ --out-dir dist/ --ignore __tests__,__mocks__",
     "lint": "eslint src",
     "test": "jest test"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/backstage-ui/backstage-modal.git"
