@@ -40,4 +40,10 @@ describe('<Modal />', () => {
 
     expect(wrapper.state('isOpen')).toBe(false);
   });
+
+  it('isOpen by props', () => {
+    const wrapper = shallow(<Modal isOpen />);
+
+    expect(wrapper.state('isOpen')).toBe(true);
+  });
 });
