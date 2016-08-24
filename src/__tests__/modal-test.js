@@ -26,4 +26,12 @@ describe('<Modal />', () => {
     const header = wrapper.find('.modal-footer');
     expect(header.length).toBe(1);
   });
+
+  it('should have a close button', () => {
+    const wrapper = shallow(<Modal />);
+    const header = wrapper.find('.modal-header');
+    const close = header.find('.modal-close');
+
+    expect(close.length).toBe(1);
+  });
 });
