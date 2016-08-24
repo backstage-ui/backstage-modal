@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './modal.css';
 
 export default class Modal extends Component {
   constructor(props) {
@@ -14,14 +15,14 @@ export default class Modal extends Component {
 
   render() {
     return (
-      <div className={this.props.className}>
-        <div className="modal-header">
-          <span className="modal-title">
+      <div className={this.props.className} style={styles.modal}>
+        <div className="modal-header" style={styles.header}>
+          <span className="modal-title" style={styles.title}>
             {this.props.title}
           </span>
           <span className="modal-close" onClick={this.close} />
         </div>
-        <div className="modal-body">
+        <div className="modal-body" styles={styles.body}>
           {this.props.children}
         </div>
       </div>
