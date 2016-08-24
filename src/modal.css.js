@@ -38,4 +38,7 @@ export default {
     position: 'absolute',
     right: '20px',
   },
+  hidden: {
+    visibility: 'hidden',
+  },
 };

@@ -14,8 +14,14 @@ export default class Modal extends Component {
   }
 
   render() {
+    let modalStyle = styles.modal;
+
+    if (!this.state.isOpen) {
+      modalStyle = Object.assign({}, styles.modal, styles.hidden);
+    }
+
     return (
-      <div className={this.props.className} style={styles.modal}>
+      <div className={this.props.className} style={modalStyle}>
         <div className="modal-header" style={styles.header}>
           <span className="modal-title" style={styles.title}>
             {this.props.title}
