@@ -57,4 +57,11 @@ describe('<Modal />', () => {
 
     expect(title.text()).toBe('my title');
   });
+
+  it('should support custom body', () => {
+    const wrapper = shallow(<Modal>my modal</Modal>);
+    const body = wrapper.find('.modal-body');
+
+    expect(body.text()).toBe('my modal');
+  });
 });
