@@ -1,54 +1,76 @@
 import React, { Component } from 'react';
 import styles from './modal.css';
 
-export default class Modal extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { isOpen: this.props.isOpen };
-    this.close = this.close.bind(this);
+class CloseButton extends Component {
+  constructor(){
+    super();
+    this.state = {isHovered: false};
   }
 
-  close() {
-    this.setState({ isOpen: false });
+  render(){
+    let buttonStyle = styles.close;
+    if (this.state.isHovered) {
+      buttonStyle = {...buttonStyle, ...styles.closeHover};
+    }
+
+    return (
+      <span
+        onClick={this.props.onClick}
+        onMouseEnter={() => this.setState({isHovered: true})}
+        onMouseLeave={() => this.setState({isHovered: false})}
+        style={buttonStyle}>
+        +
+      </span>
+    );
+  }
+}
+
+export default class Modal extends Component {
+  static propTypes = {
+    className: React.PropTypes.string,
+    isOpen: React.PropTypes.bool,
+    title: React.PropTypes.string,
+    children: React.PropTypes.oneOfType([
+      React.PropTypes.arrayOf(React.PropTypes.node),
+      React.PropTypes.node,
+    ]),
+  };
+
+  static defaultProps = {
+    isOpen: false,
+    title: '',
+  };
+
+  constructor(props) {
+    super(props);
+    this.onCloseClick = ::this.onCloseClick;
+  }
+
+  onCloseClick(event) {
+    event.preventDefault();
+    this.props.onCloseClick();
   }
 
   render() {
-    let modalStyle = styles.modal;
-
-    if (!this.state.isOpen) {
-      modalStyle = Object.assign({}, styles.modal, styles.hidden);
+    let modalStyle = styles.container;
+    if (!this.props.isOpen) {
+      modalStyle = {...modalStyle, ...styles.hidden};
     }
 
     return (
       <div className={this.props.className} style={modalStyle}>
-        <div className="modal-header" style={styles.header}>
-          <span className="modal-title" style={styles.title}>
-            {this.props.title}
-          </span>
-          <span className="modal-close" onClick={this.close} style={styles.close}>
-            x
-          </span>
-        </div>
-        <div className="modal-body" style={styles.body}>
-          {this.props.children}
+        <div style={styles.overlay}>
+          <div style={styles.modal}>
+            <div style={styles.header}>
+              <CloseButton onClick={this.onCloseClick} />
+              <span style={styles.title}>{this.props.title}</span>
+            </div>
+            <div style={styles.body}>
+              {this.props.children}
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 }
-
-Modal.propTypes = {
-  className: React.PropTypes.string,
-  isOpen: React.PropTypes.bool,
-  title: React.PropTypes.string,
-  children: React.PropTypes.oneOfType([
-    React.PropTypes.arrayOf(React.PropTypes.node),
-    React.PropTypes.node,
-  ]),
-};
-
-Modal.defaultProps = {
-  isOpen: false,
-  title: '',
-};
