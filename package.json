@@ -17,7 +17,6 @@
     "url": "git+https://github.com/backstage-ui/backstage-modal.git"
   },
   "jest": {
-    "automock": false
   },
   "author": "",
   "license": "MIT",
@@ -40,7 +39,7 @@
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-jsx-a11y": "^2.1.0",
     "eslint-plugin-react": "^6.1.2",
-    "jest": "^14.1.0",
+    "jest": "^16.0.1",
     "react": "^15.3.1",
     "react-addons-test-utils": "^15.3.1",
     "react-dom": "^15.3.1",
