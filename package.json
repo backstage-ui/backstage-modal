@@ -7,7 +7,8 @@
     "start": "webpack-dev-server",
     "build": "babel src/ --out-dir dist/ --ignore __tests__,__mocks__",
     "lint": "eslint src",
-    "test": "jest test"
+    "test": "jest test",
+    "test:watch": "jest test --watch"
   },
   "files": [
     "dist"
