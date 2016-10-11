@@ -1,8 +1,9 @@
 export default {
   container: {
-    color: "#666",
+    color: "#333",
     position: "relative",
-    fontFamily: '"Open Sans", sans-serif'
+    fontFamily: '"Open Sans", sans-serif',
+    fontSize: "16px"
   },
   hidden: {
     visibility: "hidden"
@@ -32,6 +33,9 @@ export default {
     lineHeight: "1.5rem"
   },
   title: {
+    fontSize: "1.25rem",
+    lineHeight: "1.2",
+    letterSpacing: "-0.05rem"
   },
   close: {
     "float": "right",
@@ -43,9 +47,16 @@ export default {
     transform: "rotate(45deg)"
   },
   closeHover: {
-    color: "#044cb3"
+    color: "#333"
   },
   body: {
-    padding: "0 1.5rem"
+    padding: "2.5rem 1.5rem",
+    fontSize: "0.875rem",
+    lineHeight: "1.4",
+    letterSpacing: "-0.0125rem"
+  },
+  footer: {
+    borderTop: "1px solid #ccc",
+    padding: "1.5rem 1.5rem"
   }
 };

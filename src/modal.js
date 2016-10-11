@@ -15,6 +15,7 @@ class CloseButton extends Component {
 
     return (
       <span
+        className="bs-modal__close"
         onClick={this.props.onClick}
         onMouseEnter={() => this.setState({isHovered: true})}
         onMouseLeave={() => this.setState({isHovered: false})}
@@ -25,10 +26,36 @@ class CloseButton extends Component {
   }
 }
 
+
+export class ModalBody extends Component {
+  render(){
+    return (
+      <div className="bs-modal__body" style={styles.body}>
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
+export class ModalFooter extends Component {
+  render(){
+    return (
+      <div className="bs-modal__footer" style={styles.footer}>
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
+
 export default class Modal extends Component {
   static propTypes = {
     className: React.PropTypes.string,
     isOpen: React.PropTypes.bool,
+    width: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number,
+    ]),
     title: React.PropTypes.string,
     children: React.PropTypes.oneOfType([
       React.PropTypes.arrayOf(React.PropTypes.node),
@@ -44,30 +71,42 @@ export default class Modal extends Component {
   constructor(props) {
     super(props);
     this.onCloseClick = ::this.onCloseClick;
+    this.onOverlayClick = ::this.onOverlayClick;
   }
 
   onCloseClick(event) {
     event.preventDefault();
-    this.props.onCloseClick();
+    this.props.onCloseRequest();
+  }
+
+  onOverlayClick(event) {
+    event.preventDefault();
+    const classNames = event.target.className.split(' ');
+    if (classNames.indexOf('bs-modal__overlay') === -1) {
+      return;
+    }
+    this.props.onCloseRequest();
   }
 
   render() {
     let modalStyle = styles.container;
+    if (this.props.width) {
+      modalStyle = {...modalStyle, width: this.props.width};
+    }
     if (!this.props.isOpen) {
       modalStyle = {...modalStyle, ...styles.hidden};
     }
 
     return (
       <div className={this.props.className} style={modalStyle}>
-        <div style={styles.overlay}>
+        <div className="bs-modal__overlay" style={styles.overlay} onClick={this.onOverlayClick}>
           <div style={styles.modal}>
-            <div style={styles.header}>
+            <div className="bs-modal__header" style={styles.header}>
               <CloseButton onClick={this.onCloseClick} />
-              <span style={styles.title}>{this.props.title}</span>
+              <span className="bs-modal__title" style={styles.title}>{this.props.title}</span>
             </div>
-            <div style={styles.body}>
-              {this.props.children}
-            </div>
+
+            {this.props.children}
           </div>
         </div>
       </div>

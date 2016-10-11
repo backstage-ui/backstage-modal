@@ -7,7 +7,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Modal from "../src/modal";
+import Modal, {ModalBody, ModalFooter} from "../src/modal";
 
 class Demo extends React.Component {
   constructor(){
@@ -17,7 +17,7 @@ class Demo extends React.Component {
     };
 
     this.onOpenClick = ::this.onOpenClick;
-    this.onCloseClick = ::this.onCloseClick;
+    this.onCloseRequest = ::this.onCloseRequest;
   }
 
   onOpenClick(e){
@@ -25,19 +25,29 @@ class Demo extends React.Component {
     this.setState({isOpen: true});
   }
 
-  onCloseClick(){
+  onCloseRequest(){
     this.setState({isOpen: false});
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.onOpenClick}>Open</button>
-        <Modal title="Modal Demo" isOpen={this.state.isOpen} onCloseClick={this.onCloseClick}>
-          <p>a</p>
-          <p>b</p>
-          <p>c</p>
-        </Modal>
+        <header className="heading"><h1>Backstage Modal Demo</h1></header>
+
+        <div className="content">
+          <button onClick={this.onOpenClick}>Open</button>
+
+          <Modal title="Modal Demo" isOpen={this.state.isOpen} onCloseRequest={this.onCloseRequest}>
+            <p className="full-column">Use plain HTML to cover the full modal width.</p>
+            <ModalBody>
+              <p>Wrap contents using the <code>ModalBody</code> component to get default padding.</p>
+              <p>Wrap contents using the <code>ModalFooter</code> component to get default padding and a separator.</p>
+            </ModalBody>
+            <ModalFooter>
+              <button type="button">ModalFooter</button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </div>
     );
   }
