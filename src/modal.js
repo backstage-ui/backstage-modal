@@ -77,11 +77,29 @@ export default class Modal extends Component {
   }
 
   componentWillMount() {
-    document.addEventListener('keydown', this._handleKeyDown, false);
+    this._addEvent('keydown', this._handleKeyDown);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this._handleKeyDown);
+    this._removeEvent('keydown', this._handleKeyDown);
+  }
+
+  _addEvent(eventType, listener) {
+    if (document.addEventListener) {
+      document.addEventListener(eventType, listener, false);
+    }
+    else if (document.attachEvent) {
+      document.attachEvent('on' + eventType, listener);
+    }
+  }
+
+  _removeEvent(eventType, listener) {
+    if (document.removeEventListener) {
+      document.removeEventListener(eventType, listener, false);
+    }
+    else if (document.detachEvent) {
+      document.detachEvent('on' + eventType, listener);
+    }
   }
 
   _handleKeyDown(event) {
