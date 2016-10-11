@@ -42,7 +42,7 @@ with a separator.
 
 ```js
 import React, {Component} from 'react';
-import {render} from 'react-dom';
+import ReactDOM from "react-dom";
 import Modal from 'backstage-modal';
 
 class Example extends Component {
@@ -70,5 +70,5 @@ class Example extends Component {
   }
 }
 
-render(<Example />, document.getElementById('container'));
+ReactDOM.render(<Example />, document.getElementById('container'));
 ```
