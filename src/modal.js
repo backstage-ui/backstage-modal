@@ -66,6 +66,7 @@ export default class Modal extends Component {
   static defaultProps = {
     isOpen: false,
     title: '',
+    onCloseRequest: () => {}
   };
 
   constructor(props) {
