@@ -70,19 +70,40 @@ export default class Modal extends Component {
 
   constructor(props) {
     super(props);
-    this.onCloseClick = ::this.onCloseClick;
-    this.onOverlayClick = ::this.onOverlayClick;
+    this._handleCloseClick = ::this._handleCloseClick;
+    this._handleOverlayClick = ::this._handleOverlayClick;
+    this._handleKeyDown = ::this._handleKeyDown;
   }
 
-  onCloseClick(event) {
-    event.preventDefault();
-    this.props.onCloseRequest();
+  componentWillMount() {
+    document.addEventListener('keydown', this._handleKeyDown, false);
   }
 
-  onOverlayClick(event) {
-    event.preventDefault();
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._handleKeyDown);
+  }
+
+  _handleKeyDown(event) {
+    if (event.which !== 27) {
+      return true;
+    }
+    this._handleClose();
+  }
+
+  _handleCloseClick() {
+    this._handleClose();
+  }
+
+  _handleOverlayClick(event) {
     const classNames = event.target.className.split(' ');
     if (classNames.indexOf('bs-modal__overlay') === -1) {
+      return;
+    }
+    this._handleClose();
+  }
+
+  _handleClose() {
+    if (!this.props.isOpen) {
       return;
     }
     this.props.onCloseRequest();
@@ -99,10 +120,10 @@ export default class Modal extends Component {
 
     return (
       <div className={this.props.className} style={modalStyle}>
-        <div className="bs-modal__overlay" style={styles.overlay} onClick={this.onOverlayClick}>
+        <div className="bs-modal__overlay" style={styles.overlay} onClick={this._handleOverlayClick}>
           <div style={styles.modal}>
             <div className="bs-modal__header" style={styles.header}>
-              <CloseButton onClick={this.onCloseClick} />
+              <CloseButton onClick={this._handleCloseClick} />
               <span className="bs-modal__title" style={styles.title}>{this.props.title}</span>
             </div>
 
