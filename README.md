@@ -12,7 +12,7 @@ npm install backstage-modal --save
 
 ## Components
 
-### <Modal />
+### `<Modal />`
 
 Main component that includes the overlay, the modal window and its contents.
 
@@ -28,11 +28,11 @@ Use `children` to render the inner content of the modal window.
   * by clicking on the overlay;
   * by pressing the ESC key.
 
-### <ModalBody />
+### `<ModalBody />`
 
 Optional child component to wrap content and get some nice default styles.
 
-### <ModalFooter />
+### `<ModalFooter />`
 
 Optional child component to wrap content and get some nice default styles along
 with a separator.
