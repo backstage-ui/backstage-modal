@@ -1,6 +1,8 @@
 /* global describe, it, expect */
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount, shallow, render } from 'enzyme';
+
+import Portal from 'react-portal';
 
 import Modal, {ModalBody, ModalFooter} from '../modal';
 
@@ -14,12 +16,13 @@ describe('<Modal />', () => {
   describe('props', () => {
     it('accepts a className', () => {
       const wrapper = shallow(<Modal className="foobar" />);
-      expect(wrapper.hasClass('foobar')).toBe(true);
+      const modal = wrapper.find('.bs-modal');
+      expect(modal.hasClass('foobar')).toBe(true);
     });
 
     it('accepts a width', () => {
       const wrapper = shallow(<Modal width="80%" />);
-      const modal = wrapper.first();
+      const modal = wrapper.find('.bs-modal');
       const elem = modal.first();
 
       expect(elem.prop('style').width).toEqual('80%');
@@ -51,35 +54,40 @@ describe('<Modal />', () => {
   });
 
   it('has a close button', () => {
-    const wrapper = mount(<Modal />);
-    const header = wrapper.find('.bs-modal__header');
+    const wrapper = shallow(<Modal />);
+    // Force header to render to find close button
+    const header = wrapper.find('.bs-modal__header').render();
     const close = header.find('.bs-modal__close');
 
     expect(close.length).toBe(1);
   });
 
-  it('starts hidden by default', () => {
+  it('has a Portal component', () => {
+    const wrapper = mount(<Modal />);
+    const portal = wrapper.find(Portal);
+
+    expect(portal.length).toBe(1);
+  });
+
+  it('starts closed by default', () => {
     const wrapper = shallow(<Modal />);
-    const modal = wrapper.first();
-    const elem = modal.first();
+    const portal = wrapper.find(Portal);
 
-    expect(elem.prop('style').visibility).toEqual('hidden');
+    expect(portal.prop('isOpened')).toEqual(false);
   });
 
-  it('isOpen=false hides the element', () => {
+  it('isOpen=false closes the portal', () => {
     const wrapper = shallow(<Modal isOpen={false} />);
-    const modal = wrapper.first();
-    const elem = modal.first();
+    const portal = wrapper.find(Portal);
 
-    expect(elem.prop('style').visibility).toEqual('hidden');
+    expect(portal.prop('isOpened')).toEqual(false);
   });
 
-  it('isOpen=true shows the element', () => {
+  it('isOpen=true opens the portal', () => {
     const wrapper = shallow(<Modal isOpen={true} />);
-    const modal = wrapper.first();
-    const elem = modal.first();
+    const portal = wrapper.find(Portal);
 
-    expect(elem.prop('style').visibility).toBe(undefined);
+    expect(portal.prop('isOpened')).toEqual(true);
   });
 
   describe('onCloseRequest callback', () => {

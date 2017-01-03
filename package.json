@@ -17,8 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/backstage-ui/backstage-modal.git"
   },
-  "jest": {
-  },
+  "jest": {},
   "author": "",
   "license": "MIT",
   "bugs": {
@@ -47,5 +46,7 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-portal": "^2.2.1"
+  }
 }

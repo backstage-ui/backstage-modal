@@ -5,9 +5,6 @@ export default {
     fontFamily: '"Open Sans", sans-serif',
     fontSize: "16px"
   },
-  hidden: {
-    visibility: "hidden"
-  },
   overlay: {
     position: "fixed",
     top: "0",

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Portal from 'react-portal';
 import styles from './modal.css';
 
 class CloseButton extends Component {
@@ -73,40 +74,7 @@ export default class Modal extends Component {
     super(props);
     this._handleCloseClick = ::this._handleCloseClick;
     this._handleOverlayClick = ::this._handleOverlayClick;
-    this._handleKeyDown = ::this._handleKeyDown;
-  }
-
-  componentWillMount() {
-    this._addEvent('keydown', this._handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    this._removeEvent('keydown', this._handleKeyDown);
-  }
-
-  _addEvent(eventType, listener) {
-    if (document.addEventListener) {
-      document.addEventListener(eventType, listener, false);
-    }
-    else if (document.attachEvent) {
-      document.attachEvent('on' + eventType, listener);
-    }
-  }
-
-  _removeEvent(eventType, listener) {
-    if (document.removeEventListener) {
-      document.removeEventListener(eventType, listener, false);
-    }
-    else if (document.detachEvent) {
-      document.detachEvent('on' + eventType, listener);
-    }
-  }
-
-  _handleKeyDown(event) {
-    if (event.which !== 27) {
-      return true;
-    }
-    this._handleClose();
+    this._handlePortalClose = ::this._handlePortalClose;
   }
 
   _handleCloseClick() {
@@ -128,28 +96,33 @@ export default class Modal extends Component {
     this.props.onCloseRequest();
   }
 
+  _handlePortalClose() {
+    this.props.onCloseRequest();
+  }
+
   render() {
     let modalStyle = styles.container;
     if (this.props.width) {
       modalStyle = {...modalStyle, width: this.props.width};
     }
-    if (!this.props.isOpen) {
-      modalStyle = {...modalStyle, ...styles.hidden};
-    }
+
+    const classNames = "bs-modal " + (this.props.className || "");
 
     return (
-      <div className={this.props.className} style={modalStyle}>
-        <div className="bs-modal__overlay" style={styles.overlay} onClick={this._handleOverlayClick}>
-          <div style={styles.modal}>
-            <div className="bs-modal__header" style={styles.header}>
-              <CloseButton onClick={this._handleCloseClick} />
-              <span className="bs-modal__title" style={styles.title}>{this.props.title}</span>
-            </div>
+      <Portal isOpened={this.props.isOpen} closeOnEsc={true} onClose={this._handlePortalClose}>
+        <div className={classNames} style={modalStyle}>
+          <div className="bs-modal__overlay" style={styles.overlay} onClick={this._handleOverlayClick}>
+            <div style={styles.modal}>
+              <div className="bs-modal__header" style={styles.header}>
+                <CloseButton onClick={this._handleCloseClick} />
+                <span className="bs-modal__title" style={styles.title}>{this.props.title}</span>
+              </div>
 
-            {this.props.children}
+              {this.props.children}
+            </div>
           </div>
         </div>
-      </div>
+      </Portal>
     );
   }
 }
