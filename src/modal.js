@@ -1,53 +1,9 @@
 import React, { Component } from 'react';
 import Portal from 'react-portal';
 import styles from './modal.css';
+import CloseButton from './close-button.js';
 
-class CloseButton extends Component {
-  constructor(){
-    super();
-    this.state = {isHovered: false};
-  }
-
-  render(){
-    let buttonStyle = styles.close;
-    if (this.state.isHovered) {
-      buttonStyle = {...buttonStyle, ...styles.closeHover};
-    }
-
-    return (
-      <span
-        className="bs-modal__close"
-        onClick={this.props.onClick}
-        onMouseEnter={() => this.setState({isHovered: true})}
-        onMouseLeave={() => this.setState({isHovered: false})}
-        style={buttonStyle}>
-        +
-      </span>
-    );
-  }
-}
-
-
-export class ModalBody extends Component {
-  render(){
-    return (
-      <div className="bs-modal__body" style={styles.body}>
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
-export class ModalFooter extends Component {
-  render(){
-    return (
-      <div className="bs-modal__footer" style={styles.footer}>
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
+export ModalBody from './modal-body.js';
 
 export default class Modal extends Component {
   static propTypes = {
@@ -62,60 +18,70 @@ export default class Modal extends Component {
       React.PropTypes.arrayOf(React.PropTypes.node),
       React.PropTypes.node,
     ]),
+    onCloseRequest: React.PropTypes.func,
   };
 
   static defaultProps = {
     isOpen: false,
     title: '',
-    onCloseRequest: () => {}
+    onCloseRequest: () => {},
   };
 
   constructor(props) {
     super(props);
-    this._handleCloseClick = ::this._handleCloseClick;
-    this._handleOverlayClick = ::this._handleOverlayClick;
-    this._handlePortalClose = ::this._handlePortalClose;
+    this.handleCloseClick = ::this.handleCloseClick;
+    this.handleOverlayClick = ::this.handleOverlayClick;
+    this.handlePortalClose = ::this.handlePortalClose;
   }
 
-  _handleCloseClick() {
-    this._handleClose();
+  handleCloseClick() {
+    this.handleClose();
   }
 
-  _handleOverlayClick(event) {
+  handleOverlayClick(event) {
     const classNames = event.target.className.split(' ');
     if (classNames.indexOf('bs-modal__overlay') === -1) {
       return;
     }
-    this._handleClose();
+    this.handleClose();
   }
 
-  _handleClose() {
+  handleClose() {
     if (!this.props.isOpen) {
       return;
     }
     this.props.onCloseRequest();
   }
 
-  _handlePortalClose() {
+  handlePortalClose() {
     this.props.onCloseRequest();
   }
 
   render() {
     let modalStyle = styles.container;
     if (this.props.width) {
-      modalStyle = {...modalStyle, width: this.props.width};
+      modalStyle = { ...modalStyle, width: this.props.width };
     }
 
-    const classNames = "bs-modal " + (this.props.className || "");
+    const classNames = `bs-modal ${this.props.className || ''}`;
 
     return (
-      <Portal isOpened={this.props.isOpen} closeOnEsc={true} onClose={this._handlePortalClose}>
-        <div className={classNames} style={modalStyle}>
-          <div className="bs-modal__overlay" style={styles.overlay} onClick={this._handleOverlayClick}>
+      <Portal isOpened={this.props.isOpen} closeOnEsc onClose={this.handlePortalClose}>
+        <div onKeyDown={this.handleKeyDown} className={classNames} style={modalStyle}>
+          <div
+            className="bs-modal__overlay"
+            style={styles.overlay}
+            onClick={this.handleOverlayClick}
+          >
             <div style={styles.modal}>
               <div className="bs-modal__header" style={styles.header}>
-                <CloseButton onClick={this._handleCloseClick} />
-                <span className="bs-modal__title" style={styles.title}>{this.props.title}</span>
+                <CloseButton onClick={this.handleCloseClick} />
+                <span
+                  className="bs-modal__title"
+                  style={styles.title}
+                >
+                  {this.props.title}
+                </span>
               </div>
 
               {this.props.children}

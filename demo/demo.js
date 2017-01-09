@@ -7,7 +7,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Modal, {ModalBody, ModalFooter} from "../src/modal";
+import Modal from "../src/modal";
+import ModalBody from "../src/modal-body";
+import ModalFooter from "../src/modal-footer";
 
 class Demo extends React.Component {
   constructor(){
