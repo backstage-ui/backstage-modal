@@ -10,9 +10,6 @@ exports.default = {
     fontFamily: '"Open Sans", sans-serif',
     fontSize: "16px"
   },
-  hidden: {
-    visibility: "hidden"
-  },
   overlay: {
     position: "fixed",
     top: "0",
@@ -58,7 +55,9 @@ exports.default = {
     padding: "2.5rem 1.5rem",
     fontSize: "0.875rem",
     lineHeight: "1.4",
-    letterSpacing: "-0.0125rem"
+    letterSpacing: "-0.0125rem",
+    height: "250px",
+    overflowY: "auto"
   },
   footer: {
     borderTop: "1px solid #ccc",
