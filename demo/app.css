@@ -1,0 +1,40 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+}
+button {
+  background: #333;
+  color: #fff;
+  font-weight: normal;
+  padding: 5px 10px;
+  border: 0;
+  font-size: 15px;
+  border-radius: 3px;
+}
+code {
+  font-weight: bold;
+}
+
+.heading {
+  background: #212121;
+  color: #fff;
+  padding: 0 20px;
+  margin-bottom: 40px;
+  line-height: 70px;
+}
+.heading h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.content {
+  padding: 0 40px;
+}
+
+.full-column {
+  color: #666;
+  text-align: center;
+  padding: 20px 5px;
+  background-color: #ccc;
+  margin: 0;
+}
