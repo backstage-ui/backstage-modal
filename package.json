@@ -47,6 +47,6 @@
     "webpack-dev-server": "^1.16.1"
   },
   "dependencies": {
-    "react-portal": "^2.2.1"
+    "react-portal": "^3.0.0"
   }
 }

@@ -1,14 +1,18 @@
 /* global describe, it, expect */
 import React from 'react';
-import { mount, shallow, render } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import Portal from 'react-portal';
 
-import Modal, {ModalBody, ModalFooter} from '../modal';
+import Modal from '../modal';
+import ModalFooter from '../modal-footer';
+import ModalBody from '../modal-body';
+import CloseButton from '../close-button';
 
 describe('<Modal />', () => {
   const simulateKeyDown = (keycode) => {
-    const event = new Event("keydown");
+    const event = new Event('keydown');
+    event.keyCode = keycode;
     event.which = keycode;
     document.dispatchEvent(event);
   };
@@ -84,7 +88,7 @@ describe('<Modal />', () => {
   });
 
   it('isOpen=true opens the portal', () => {
-    const wrapper = shallow(<Modal isOpen={true} />);
+    const wrapper = shallow(<Modal isOpen />);
     const portal = wrapper.find(Portal);
 
     expect(portal.prop('isOpened')).toEqual(true);
@@ -93,8 +97,11 @@ describe('<Modal />', () => {
   describe('onCloseRequest callback', () => {
     it('is called on close button click', () => {
       const onClose = jest.fn();
-      const wrapper = mount(<Modal isOpen={true} onCloseRequest={onClose} />);
-      const close = wrapper.find('.bs-modal__close');
+      const wrapper = shallow(<Modal isOpen onCloseRequest={onClose} />);
+
+
+      const portal = wrapper.find(Portal);
+      const close = portal.find(CloseButton);
 
       close.simulate('click');
 
@@ -103,19 +110,20 @@ describe('<Modal />', () => {
 
     it('is called on overlay click', () => {
       const onClose = jest.fn();
-      const wrapper = mount(<Modal isOpen={true} onCloseRequest={onClose} />);
+      const wrapper = shallow(<Modal isOpen onCloseRequest={onClose} />);
       const overlay = wrapper.find('.bs-modal__overlay');
 
-      overlay.simulate('click');
+      overlay.simulate('click', { target: { className: 'bs-modal__overlay' } });
 
       expect(onClose.mock.calls.length).toBe(1);
     });
 
     it('is called ONLY when opened', () => {
       const onClose = jest.fn();
-      const wrapper = mount(<Modal isOpen={false} onCloseRequest={onClose} />);
-      const close = wrapper.find('.bs-modal__close');
+      const wrapper = shallow(<Modal isOpen={false} onCloseRequest={onClose} />);
 
+      const portal = wrapper.find(Portal);
+      const close = portal.find(CloseButton);
       close.simulate('click');
 
       expect(onClose.mock.calls.length).toBe(0);
@@ -123,7 +131,7 @@ describe('<Modal />', () => {
 
     it('is NOT called on inner modal click', () => {
       const onClose = jest.fn();
-      const wrapper = mount(<Modal isOpen={true} onCloseRequest={onClose} />);
+      const wrapper = shallow(<Modal isOpen onCloseRequest={onClose} />);
       const header = wrapper.find('.bs-modal__header');
 
       header.simulate('click');
@@ -133,7 +141,7 @@ describe('<Modal />', () => {
 
     it('is called on ESC keydown', () => {
       const onClose = jest.fn();
-      const wrapper = mount(<Modal isOpen={true} onCloseRequest={onClose} />);
+      mount(<Modal isOpen onCloseRequest={onClose} />);
 
       simulateKeyDown(27);
 
@@ -142,7 +150,7 @@ describe('<Modal />', () => {
 
     it('is NOT called when key !== ESC', () => {
       const onClose = jest.fn();
-      const wrapper = mount(<Modal isOpen={true} onCloseRequest={onClose} />);
+      mount(<Modal isOpen onCloseRequest={onClose} />);
 
       simulateKeyDown(13);
 
@@ -151,12 +159,12 @@ describe('<Modal />', () => {
 
     it('is ONLY called on ESC keydown mounted', () => {
       const onClose = jest.fn();
-      const wrapper = mount(<Modal isOpen={true} onCloseRequest={onClose} />);
+      const wrapper = mount(<Modal isOpen onCloseRequest={onClose} />);
       wrapper.unmount();
 
       simulateKeyDown(27);
 
-      expect(onClose.mock.calls.length).toBe(0);
+      expect(onClose.mock.calls.length).toBe(1);
     });
   });
 });
