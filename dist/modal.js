@@ -83,9 +83,12 @@ var Modal = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var modalStyle = _modal2.default.container;
+      var modalStyle = _modal2.default.modal;
       if (this.props.width) {
         modalStyle = _extends({}, modalStyle, { width: this.props.width });
+      }
+      if (this.props.height) {
+        modalStyle = _extends({}, modalStyle, { height: this.props.height });
       }
 
       var classNames = 'bs-modal ' + (this.props.className || '');
@@ -95,7 +98,7 @@ var Modal = function (_Component) {
         { isOpened: this.props.isOpen, closeOnEsc: true, onClose: this.handlePortalClose },
         _react2.default.createElement(
           'div',
-          { onKeyDown: this.handleKeyDown, className: classNames, style: modalStyle },
+          { onKeyDown: this.handleKeyDown, className: classNames, style: _modal2.default.container },
           _react2.default.createElement(
             'div',
             {
@@ -105,7 +108,7 @@ var Modal = function (_Component) {
             },
             _react2.default.createElement(
               'div',
-              { style: _modal2.default.modal },
+              { style: modalStyle },
               _react2.default.createElement(
                 'div',
                 { className: 'bs-modal__header', style: _modal2.default.header },
@@ -134,6 +137,7 @@ Modal.propTypes = {
   className: _react2.default.PropTypes.string,
   isOpen: _react2.default.PropTypes.bool,
   width: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
+  height: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
   title: _react2.default.PropTypes.string,
   children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.node), _react2.default.PropTypes.node]),
   onCloseRequest: _react2.default.PropTypes.func
