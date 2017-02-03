@@ -13,6 +13,10 @@ export default class Modal extends Component {
       React.PropTypes.string,
       React.PropTypes.number,
     ]),
+    height: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number,
+    ]),
     title: React.PropTypes.string,
     children: React.PropTypes.oneOfType([
       React.PropTypes.arrayOf(React.PropTypes.node),
@@ -58,22 +62,25 @@ export default class Modal extends Component {
   }
 
   render() {
-    let modalStyle = styles.container;
+    let modalStyle = styles.modal;
     if (this.props.width) {
       modalStyle = { ...modalStyle, width: this.props.width };
+    }
+    if (this.props.height) {
+      modalStyle = { ...modalStyle, height: this.props.height };
     }
 
     const classNames = `bs-modal ${this.props.className || ''}`;
 
     return (
       <Portal isOpened={this.props.isOpen} closeOnEsc onClose={this.handlePortalClose}>
-        <div onKeyDown={this.handleKeyDown} className={classNames} style={modalStyle}>
+        <div onKeyDown={this.handleKeyDown} className={classNames} style={styles.container}>
           <div
             className="bs-modal__overlay"
             style={styles.overlay}
             onClick={this.handleOverlayClick}
           >
-            <div style={styles.modal}>
+            <div style={modalStyle}>
               <div className="bs-modal__header" style={styles.header}>
                 <CloseButton onClick={this.handleCloseClick} />
                 <span

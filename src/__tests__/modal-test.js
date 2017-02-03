@@ -26,10 +26,20 @@ describe('<Modal />', () => {
 
     it('accepts a width', () => {
       const wrapper = shallow(<Modal width="80%" />);
-      const modal = wrapper.find('.bs-modal');
-      const elem = modal.first();
+      const modal = wrapper.find('.bs-modal__overlay');
+
+      const elem = modal.children();
 
       expect(elem.prop('style').width).toEqual('80%');
+    });
+
+    it('accepts a height', () => {
+      const wrapper = shallow(<Modal height="80%" />);
+      const modal = wrapper.find('.bs-modal__overlay');
+
+      const elem = modal.children();
+
+      expect(elem.prop('style').height).toEqual('80%');
     });
 
     it('accepts a title', () => {
