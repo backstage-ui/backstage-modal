@@ -27,7 +27,9 @@ exports.default = {
     transform: 'translate(-50%, -50%)',
     zIndex: '3',
     backgroundColor: '#fff',
-    borderRadius: '4px'
+    borderRadius: '4px',
+    display: 'flex',
+    flexFlow: 'column'
   },
   header: {
     padding: '1.5rem 1.5rem',
@@ -56,7 +58,6 @@ exports.default = {
     fontSize: '0.875rem',
     lineHeight: '1.4',
     letterSpacing: '-0.0125rem',
-    height: '250px',
     overflowY: 'auto'
   },
   footer: {
