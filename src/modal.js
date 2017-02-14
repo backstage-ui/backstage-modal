@@ -82,13 +82,13 @@ export default class Modal extends Component {
           >
             <div style={modalStyle}>
               <div className="bs-modal__header" style={styles.header}>
-                <CloseButton onClick={this.handleCloseClick} />
                 <span
                   className="bs-modal__title"
                   style={styles.title}
                 >
                   {this.props.title}
                 </span>
+                <CloseButton onClick={this.handleCloseClick} />
               </div>
 
               {this.props.children}

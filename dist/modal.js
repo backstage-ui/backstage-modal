@@ -112,7 +112,6 @@ var Modal = function (_Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'bs-modal__header', style: _modal2.default.header },
-                _react2.default.createElement(_closeButton2.default, { onClick: this.handleCloseClick }),
                 _react2.default.createElement(
                   'span',
                   {
@@ -120,7 +119,8 @@ var Modal = function (_Component) {
                     style: _modal2.default.title
                   },
                   this.props.title
-                )
+                ),
+                _react2.default.createElement(_closeButton2.default, { onClick: this.handleCloseClick })
               ),
               this.props.children
             )

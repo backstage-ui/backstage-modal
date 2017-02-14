@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './modal.css';
+import Close from './close-icon';
 
 export default class CloseButton extends Component {
   static propTypes = {
@@ -25,7 +26,7 @@ export default class CloseButton extends Component {
         onMouseLeave={() => this.setState({ isHovered: false })}
         style={buttonStyle}
       >
-        +
+        <Close />
       </span>
     );
   }

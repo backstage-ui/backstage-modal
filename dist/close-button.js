@@ -16,6 +16,10 @@ var _modal = require('./modal.css');
 
 var _modal2 = _interopRequireDefault(_modal);
 
+var _closeIcon = require('./close-icon');
+
+var _closeIcon2 = _interopRequireDefault(_closeIcon);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59,7 +63,7 @@ var CloseButton = function (_Component) {
           },
           style: buttonStyle
         },
-        '+'
+        _react2.default.createElement(_closeIcon2.default, null)
       );
     }
   }]);
