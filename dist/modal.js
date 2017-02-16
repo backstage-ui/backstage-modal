@@ -61,8 +61,8 @@ var Modal = function (_Component) {
   }, {
     key: 'handleOverlayClick',
     value: function handleOverlayClick(event) {
-      var classNames = event.target.className.split(' ');
-      if (classNames.indexOf('bs-modal__overlay') === -1) {
+      var classNames = event.target.classList;
+      if (classNames.contains('bs-modal__overlay') === false) {
         return;
       }
       this.handleClose();

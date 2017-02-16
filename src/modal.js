@@ -43,8 +43,8 @@ export default class Modal extends Component {
   }
 
   handleOverlayClick(event) {
-    const classNames = event.target.className.split(' ');
-    if (classNames.indexOf('bs-modal__overlay') === -1) {
+    const classNames = event.target.classList;
+    if (classNames.contains('bs-modal__overlay') === false) {
       return;
     }
     this.handleClose();

@@ -123,7 +123,7 @@ describe('<Modal />', () => {
       const wrapper = shallow(<Modal isOpen onCloseRequest={onClose} />);
       const overlay = wrapper.find('.bs-modal__overlay');
 
-      overlay.simulate('click', { target: { className: 'bs-modal__overlay' } });
+      overlay.simulate('click', { target: { classList: { contains: () => true } } });
 
       expect(onClose.mock.calls.length).toBe(1);
     });
