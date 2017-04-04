@@ -43,7 +43,7 @@ with a separator.
 ```js
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
-import Modal from 'backstage-modal';
+import Modal, {ModalBody, ModalFooter} from 'backstage-modal';
 
 class Example extends Component {
   constructor(){

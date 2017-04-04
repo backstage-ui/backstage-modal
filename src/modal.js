@@ -4,6 +4,7 @@ import styles from './modal.css';
 import CloseButton from './close-button.js';
 
 export ModalBody from './modal-body.js';
+export ModalFooter from './modal-footer.js';
 
 export default class Modal extends Component {
   static propTypes = {
