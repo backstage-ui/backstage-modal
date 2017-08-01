@@ -2,7 +2,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 
-import Portal from 'react-portal';
+import Portal from 'react-portal-stateless';
 
 import Modal from '../modal';
 import ModalFooter from '../modal-footer';
@@ -15,6 +15,11 @@ describe('<Modal />', () => {
     event.keyCode = keycode;
     event.which = keycode;
     document.dispatchEvent(event);
+  };
+
+  const simulateMouseUp = (target) => {
+    const event = new Event('mouseup');
+    target.dispatchEvent(event);
   };
 
   describe('props', () => {
@@ -87,28 +92,27 @@ describe('<Modal />', () => {
     const wrapper = shallow(<Modal />);
     const portal = wrapper.find(Portal);
 
-    expect(portal.prop('isOpened')).toEqual(false);
+    expect(portal.prop('isOpen')).toEqual(false);
   });
 
   it('isOpen=false closes the portal', () => {
     const wrapper = shallow(<Modal isOpen={false} />);
     const portal = wrapper.find(Portal);
 
-    expect(portal.prop('isOpened')).toEqual(false);
+    expect(portal.prop('isOpen')).toEqual(false);
   });
 
   it('isOpen=true opens the portal', () => {
     const wrapper = shallow(<Modal isOpen />);
     const portal = wrapper.find(Portal);
 
-    expect(portal.prop('isOpened')).toEqual(true);
+    expect(portal.prop('isOpen')).toEqual(true);
   });
 
   describe('onCloseRequest callback', () => {
     it('is called on close button click', () => {
       const onClose = jest.fn();
       const wrapper = shallow(<Modal isOpen onCloseRequest={onClose} />);
-
 
       const portal = wrapper.find(Portal);
       const close = portal.find(CloseButton);
@@ -139,12 +143,16 @@ describe('<Modal />', () => {
       expect(onClose.mock.calls.length).toBe(0);
     });
 
-    it('is NOT called on inner modal click', () => {
+    it('is NOT called on inner modal click or out of overlay', () => {
       const onClose = jest.fn();
-      const wrapper = shallow(<Modal isOpen onCloseRequest={onClose} />);
-      const header = wrapper.find('.bs-modal__header');
+      const wrapper = mount(<Modal onCloseRequest={onClose} />);
+      wrapper.setProps({ isOpen: true });
 
-      header.simulate('click');
+      const header = document.querySelector('.bs-modal__header');
+      simulateMouseUp(header);
+
+      const body = document.querySelector('body');
+      simulateMouseUp(body);
 
       expect(onClose.mock.calls.length).toBe(0);
     });
@@ -174,7 +182,15 @@ describe('<Modal />', () => {
 
       simulateKeyDown(27);
 
-      expect(onClose.mock.calls.length).toBe(1);
+      expect(onClose.mock.calls.length).toBe(0);
+    });
+
+    it('is NOT called when isOpen props change', () => {
+      const onClose = jest.fn();
+      const wrapper = mount(<Modal isOpen onCloseRequest={onClose} />);
+      wrapper.setProps({ isOpen: false });
+
+      expect(onClose.mock.calls.length).toBe(0);
     });
   });
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Portal from 'react-portal';
+import Portal from 'react-portal-stateless';
 import styles from './modal.css';
 import CloseButton from './close-button.js';
 
@@ -34,13 +34,8 @@ export default class Modal extends Component {
 
   constructor(props) {
     super(props);
-    this.handleCloseClick = ::this.handleCloseClick;
     this.handleOverlayClick = ::this.handleOverlayClick;
-    this.handlePortalClose = ::this.handlePortalClose;
-  }
-
-  handleCloseClick() {
-    this.handleClose();
+    this.handleClose = ::this.handleClose;
   }
 
   handleOverlayClick(event) {
@@ -58,10 +53,6 @@ export default class Modal extends Component {
     this.props.onCloseRequest();
   }
 
-  handlePortalClose() {
-    this.props.onCloseRequest();
-  }
-
   render() {
     let modalStyle = styles.modal;
     if (this.props.width) {
@@ -74,7 +65,7 @@ export default class Modal extends Component {
     const classNames = `bs-modal ${this.props.className || ''}`;
 
     return (
-      <Portal isOpened={this.props.isOpen} closeOnEsc onClose={this.handlePortalClose}>
+      <Portal isOpen={this.props.isOpen} closeOnEsc onClose={this.handleClose}>
         <div onKeyDown={this.handleKeyDown} className={classNames} style={styles.container}>
           <div
             className="bs-modal__overlay"
@@ -89,7 +80,7 @@ export default class Modal extends Component {
                 >
                   {this.props.title}
                 </span>
-                <CloseButton onClick={this.handleCloseClick} />
+                <CloseButton onClick={this.handleClose} />
               </div>
 
               {this.props.children}
