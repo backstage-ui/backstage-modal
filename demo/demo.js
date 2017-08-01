@@ -4,31 +4,31 @@
  * License: MIT
  */
 
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import Modal from "../src/modal";
-import ModalBody from "../src/modal-body";
-import ModalFooter from "../src/modal-footer";
+import Modal from '../src/modal';
+import ModalBody from '../src/modal-body';
+import ModalFooter from '../src/modal-footer';
 
 class Demo extends React.Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
-      isOpen: true
+      isOpen: true,
     };
 
     this.onOpenClick = ::this.onOpenClick;
     this.onCloseRequest = ::this.onCloseRequest;
   }
 
-  onOpenClick(e){
+  onOpenClick(e) {
     e.preventDefault();
-    this.setState({isOpen: true});
+    this.setState({ isOpen: true });
   }
 
-  onCloseRequest(){
-    this.setState({isOpen: false});
+  onCloseRequest() {
+    this.setState({ isOpen: false });
   }
 
   render() {
@@ -42,8 +42,13 @@ class Demo extends React.Component {
           <Modal title="Modal Demo" isOpen={this.state.isOpen} onCloseRequest={this.onCloseRequest}>
             <p className="full-column">Use plain HTML to cover the full modal width.</p>
             <ModalBody>
-              <p>Wrap contents using the <code>ModalBody</code> component to get default padding.</p>
-              <p>Wrap contents using the <code>ModalFooter</code> component to get default padding and a separator.</p>
+              <p>
+                Wrap contents using the <code>ModalBody</code> component to get default padding.
+              </p>
+              <p>
+                Wrap contents using the <code>ModalFooter</code>
+                component to get default padding and a separator.
+              </p>
             </ModalBody>
             <ModalFooter>
               <button type="button">ModalFooter</button>
@@ -55,4 +60,4 @@ class Demo extends React.Component {
   }
 }
 
-ReactDOM.render(<Demo />, document.getElementById("container"));
+ReactDOM.render(<Demo />, document.getElementById('container'));
