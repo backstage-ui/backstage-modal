@@ -1,6 +1,6 @@
 {
   "name": "backstage-modal",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "backstage modal",
   "main": "dist/modal.js",
   "scripts": {
