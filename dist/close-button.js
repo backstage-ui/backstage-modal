@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _modal = require('./modal.css');
 
 var _modal2 = _interopRequireDefault(_modal);
@@ -72,6 +76,6 @@ var CloseButton = function (_Component) {
 }(_react.Component);
 
 CloseButton.propTypes = {
-  onClick: _react2.default.PropTypes.func
+  onClick: _propTypes2.default.func
 };
 exports.default = CloseButton;

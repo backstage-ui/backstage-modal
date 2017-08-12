@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from './modal.css';
 import Close from './close-icon';
 
 export default class CloseButton extends Component {
   static propTypes = {
-    onClick: React.PropTypes.func,
+    onClick: PropTypes.func,
   };
 
   constructor() {

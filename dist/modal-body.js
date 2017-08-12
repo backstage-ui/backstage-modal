@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _modal = require('./modal.css');
 
 var _modal2 = _interopRequireDefault(_modal);
@@ -46,6 +50,6 @@ var ModalBody = function (_Component) {
 }(_react.Component);
 
 ModalBody.propTypes = {
-  children: _react2.default.PropTypes.node
+  children: _propTypes2.default.node
 };
 exports.default = ModalBody;

@@ -13,6 +13,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _reactPortalStateless = require('react-portal-stateless');
 
 var _reactPortalStateless2 = _interopRequireDefault(_reactPortalStateless);
@@ -128,13 +132,13 @@ var Modal = function (_Component) {
 }(_react.Component);
 
 Modal.propTypes = {
-  className: _react2.default.PropTypes.string,
-  isOpen: _react2.default.PropTypes.bool,
-  width: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
-  height: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
-  title: _react2.default.PropTypes.string,
-  children: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.node), _react2.default.PropTypes.node]),
-  onCloseRequest: _react2.default.PropTypes.func
+  className: _propTypes2.default.string,
+  isOpen: _propTypes2.default.bool,
+  width: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
+  height: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
+  title: _propTypes2.default.string,
+  children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node]),
+  onCloseRequest: _propTypes2.default.func
 };
 Modal.defaultProps = {
   isOpen: false,

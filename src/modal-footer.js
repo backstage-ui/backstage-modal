@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import styles from './modal.css';
 
 export default class ModalFooter extends Component {
   static propTypes = {
-    children: React.PropTypes.node,
+    children: PropTypes.node,
   };
 
   render() {

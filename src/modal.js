@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Portal from 'react-portal-stateless';
 import styles from './modal.css';
 import CloseButton from './close-button.js';
@@ -8,22 +9,22 @@ export ModalFooter from './modal-footer.js';
 
 export default class Modal extends Component {
   static propTypes = {
-    className: React.PropTypes.string,
-    isOpen: React.PropTypes.bool,
-    width: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number,
+    className: PropTypes.string,
+    isOpen: PropTypes.bool,
+    width: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
     ]),
-    height: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number,
+    height: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
     ]),
-    title: React.PropTypes.string,
-    children: React.PropTypes.oneOfType([
-      React.PropTypes.arrayOf(React.PropTypes.node),
-      React.PropTypes.node,
+    title: PropTypes.string,
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
     ]),
-    onCloseRequest: React.PropTypes.func,
+    onCloseRequest: PropTypes.func,
   };
 
   static defaultProps = {
